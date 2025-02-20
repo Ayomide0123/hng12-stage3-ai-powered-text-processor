@@ -15,10 +15,10 @@ Master Chief AI, an AI-Powered Text Processor, is a web application built with [
 
 Here are some screenshots of the application:
 
-![Landing Page]("./screenshots/landingPage.png")
+![Landing Page](screenshots/landingPage.png)
 *Landing Page: The initial interface where users can start interacting with the AI.*
 
-![Chat Interface]("./screenshots/chatInterface.png")
+![Chat Interface](screenshots/chatInterface.png)
 *Chat Interface: The area where users can type messages and receive responses from the AI.*
 
 

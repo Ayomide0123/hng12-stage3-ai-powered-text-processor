@@ -1,12 +1,70 @@
-# hng12-stage3-ai-powered-text-processor
-AI-Powered Text Processing Interface
+# Master Chief AI
 
+## Overview
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Master Chief AI, an AI-Powered Text Processor, is a web application built with [Next.js](https://nextjs.org) that allows users to interact with an AI assistant. This application provides functionalities for language detection, text translation, and summarization, all in one seamless interface. Users can type messages, and the AI will respond with translations or summaries based on the input.
+
+## Features
+
+- **Language Detection**: Automatically detects the language of the input text.
+- **Text Translation**: Translates text from one language to another.
+- **Text Summarization**: Generates concise summaries of longer texts.
+- **User-Friendly Interface**: A clean and intuitive UI for easy interaction with the AI assistant.
+
+## Images
+
+Here are some screenshots of the application:
+
+![Landing Page]("./screenshots/landingPage.png")
+*Landing Page: The initial interface where users can start interacting with the AI.*
+
+![Chat Interface]("./screenshots/chatInterface.png")
+*Chat Interface: The area where users can type messages and receive responses from the AI.*
+
 
 ## Getting Started
 
-First, run the development server:
+To get started with the AI-Powered Text Processor, follow these steps:
+
+### Prerequisites
+
+Make sure you have the following installed on your machine:
+
+- [Node.js](https://nodejs.org/) (version 14 or later)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/hng12-stage3-ai-powered-text-processor.git
+   cd hng12-stage3-ai-powered-text-processor
+   ```
+
+2. Install the dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+
+   Create a `.env.local` file in the root of the project and add the following variables:
+
+   ```plaintext
+   NEXT_PUBLIC_LANGUAGE_DETECTOR_TOKEN=your_language_detector_token
+   NEXT_PUBLIC_TRANSLATOR_TOKEN=your_translator_token
+   NEXT_PUBLIC_SUMMARIZATION_TOKEN=your_summarization_token
+   NEXT_PUBLIC_HTTP_HEADER=origin-trial
+   NEXT_PUBLIC_LOCAL_STORAGE_KEY=chatMessages
+   ```
+
+   Replace `your_language_detector_token`, `your_translator_token`, and `your_summarization_token` with the appropriate tokens for the respective APIs.
+
+### Running the Application
+
+To run the development server, use the following command:
 
 ```bash
 npm run dev
@@ -18,23 +76,21 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open your browser and navigate to [http://localhost:3000](http://localhost:3000) to see the application in action.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Start a conversation with Master Chief by typing a message in the input field.
+2. The AI will detect the language of your message and respond accordingly.
+3. You can request translations or summaries by clicking the respective buttons.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about Next.js and its features, check out the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Learn Next.js](https://nextjs.org/learn)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contributing
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributions are welcome! If you have suggestions for improvements or new features, feel free to open an issue or submit a pull request.

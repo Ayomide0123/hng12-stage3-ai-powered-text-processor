@@ -1,58 +1,85 @@
 // Language Detection
 export const handleLanguageDetection = async (inputText) => {
   try {
-    const languageDetectorCapabilities = await self.ai.languageDetector.capabilities();
+    const languageDetectorCapabilities =
+      await self.ai.languageDetector.capabilities();
+    const canDetect = languageDetectorCapabilities.capabilities;
 
-    if (languageDetectorCapabilities.capabilities === 'no') {
-      throw new Error('Language detection is not available.');
+    if (canDetect === "no") {
+      throw new Error("Language detection is not available.");
     }
 
-    const detector = await self.ai.languageDetector.create();
+    let detector;
+    if (canDetect === "readily") {
+      detector = await self.ai.languageDetector.create();
+    } else {
+      detector = await self.ai.languageDetector.create({
+        monitor(m) {
+          m.addEventListener("downloadprogress", (e) => {
+            console.log(`Downloaded ${e.loaded} of ${e.total} bytes.`);
+          });
+        },
+      });
+      await detector.ready;
+    }
 
     const results = await detector.detect(inputText);
-    if (!results.length) {
-      throw new Error('No language detected.');
+    if (results.length === 0) {
+      throw new Error("No language detected.");
     }
 
-    return results[0].detectedLanguage; // Return only the language code
+    const topLanguage = results[0].detectedLanguage;
+    return topLanguage;
   } catch (err) {
     throw new Error(err.message);
   }
 };
 
-
-
 // Summarization
 export const handleSummarization = async (inputText) => {
   try {
     const summarizerCapabilities = await self.ai.summarizer.capabilities();
-    if (summarizerCapabilities.available === 'no') {
-      throw new Error('Summarization is not available.');
+    const available = summarizerCapabilities.available;
+
+    if (available === "no") {
+      throw new Error("Summarization is not available.");
     }
 
-    const summarizer = await self.ai.summarizer.create({
-      type: 'summary',
-      format: 'plaintext',
-      length: 'medium',
-    });
-
-    const summary = await summarizer.summarize(inputText);
-    return `Summary: ${summary}`;
+    const summarizer = await self.ai.summarizer.create();
+    const summary = await summarizer.summarize(inputText); // No context needed
+    return summary;
   } catch (err) {
     throw new Error(err.message);
   }
 };
 
 // Translation
-export const handleTranslation = async (inputText, sourceLanguage, targetLanguage) => {
+export const handleTranslation = async (
+  inputText,
+  sourceLanguage,
+  targetLanguage
+) => {
   try {
     const translatorCapabilities = await self.ai.translator.capabilities();
-    if (!translatorCapabilities.languagePairAvailable(sourceLanguage, targetLanguage)) {
-      throw new Error(`Translation from ${sourceLanguage} to ${targetLanguage} is not available.`);
+    const isLanguagePairAvailable =
+      translatorCapabilities.languagePairAvailable(
+        sourceLanguage,
+        targetLanguage
+      );
+
+    if (isLanguagePairAvailable !== "readily") {
+      throw new Error(
+        `Translation from ${sourceLanguage} to ${targetLanguage} is not available.`
+      );
     }
 
-    const translator = await self.ai.translator.create({ sourceLanguage, targetLanguage });
-    return await translator.translate(inputText);
+    const translator = await self.ai.translator.create({
+      sourceLanguage,
+      targetLanguage,
+    });
+
+    const translation = await translator.translate(inputText);
+    return translation;
   } catch (err) {
     throw new Error(err.message);
   }

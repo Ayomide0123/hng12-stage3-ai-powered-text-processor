@@ -11,6 +11,7 @@ import masterChiefDp from "../assets/masterChiefDp.jpg";
 import { CiMenuFries } from "react-icons/ci";
 import { FiSend } from "react-icons/fi";
 import { useRouter } from "next/navigation";
+import AboutMasterChief from "../components/aboutMasterChief";
 
 // List of available languages
 const LANGUAGES = [
@@ -34,6 +35,7 @@ export default function ChatBox() {
   const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 
   // Load messages from local storage when the component mounts
   useEffect(() => {
@@ -226,6 +228,12 @@ export default function ChatBox() {
                 >
                   Back
                 </button>
+                <button
+                  className="w-full text-left p-2 text-white hover:bg-green-500"
+                  onClick={() => setIsAboutModalOpen(true)}
+                >
+                  About Master Chief
+                </button>
               </div>
             )}
           </div>
@@ -392,6 +400,11 @@ export default function ChatBox() {
 
         {error && <p className="text-red-500 text-center mt-2">{error}</p>}
       </div>
+
+      {/* AboutMasterChief modal */}
+      {isAboutModalOpen && (
+        <AboutMasterChief onClose={() => setIsAboutModalOpen(false)} />
+      )}
     </div>
   );
 }

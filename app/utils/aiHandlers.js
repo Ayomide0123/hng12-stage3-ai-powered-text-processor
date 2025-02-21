@@ -54,7 +54,7 @@ export const handleLanguageDetection = async (inputText) => {
         targetLanguage
       );
 
-    if (isLanguagePairAvailable !== "readily") {
+    if (isLanguagePairAvailable === "no") {
       throw new Error(
         `Translation from ${sourceLanguage} to ${targetLanguage} is not available.`
       );

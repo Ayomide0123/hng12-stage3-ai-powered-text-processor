@@ -37,3 +37,22 @@
 .chatBox::-webkit-scrollbar-thumb:hover {
   background: #4b5563;
 }
+
+/* Scrollbar for the textArea */
+.textArea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.textArea::-webkit-scrollbar-track {
+  background: #64748b;
+  border-radius: 10px;
+}
+
+.textArea::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 10px;
+}
+
+.textArea::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}

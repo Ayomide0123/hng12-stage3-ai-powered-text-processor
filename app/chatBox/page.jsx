@@ -183,8 +183,18 @@ export default function ChatBox() {
 
   return (
     // The Chat UI
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-      <div className="w-full max-w-3xl p-4 bg-gray-800 rounded-lg shadow-lg flex flex-col h-[90vh]">
+    <div
+      className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white"
+      aria-label="Chat Interface"
+    >
+      <div
+        className="w-full max-w-3xl p-4 bg-gray-800 rounded-lg shadow-lg flex flex-col h-[90vh]"
+        role="region"
+        aria-labelledby="chatbox-title"
+      >
+        <h2 id="chatbox-title" className="hidden">
+          Chat with Master Chief
+        </h2>
         <div className="flex items-center justify-between border-b border-gray-700 pb-2 mb-4">
           {/* Master Chief Display Picture and Status */}
           <div className="mx-auto flex flex-col items-center">
@@ -194,7 +204,7 @@ export default function ChatBox() {
               className="w-10 h-10 rounded-full"
             />
             <div className="flex items-center space-x-2 mt-2">
-              <span className="w-3 h-3 bg-green-500 rounded-full"></span>
+              <span className="w-2 h-2 bg-green-500 rounded-full"></span>
               <h1 className="text-lg font-semibold">Master Chief</h1>
             </div>
             <p className="text-sm text-gray-400">
@@ -377,7 +387,7 @@ export default function ChatBox() {
         {/* Text Field for the user */}
         <div className="flex items-center p-2 border-t border-gray-700">
           <textarea
-            className="w-full p-2 bg-gray-700 text-white rounded-lg resize-none outline-none"
+            className="w-full h-[120px] p-2 bg-gray-700 text-white rounded-lg resize-none outline-none textArea"
             placeholder="Type a message..."
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
@@ -388,11 +398,14 @@ export default function ChatBox() {
               }
             }}
             disabled={isProcessing}
+            aria-label="Message input field"
+            aria-required="true"
           />
           <button
             className="ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 disabled:bg-blue-300 disabled:cursor-not-allowed"
             onClick={handleSendMessage}
-            disabled={isProcessing}
+            disabled={isProcessing || inputText === ""}
+            aria-label="Send message"
           >
             <FiSend />
           </button>
@@ -403,7 +416,10 @@ export default function ChatBox() {
 
       {/* AboutMasterChief modal */}
       {isAboutModalOpen && (
-        <AboutMasterChief onClose={() => setIsAboutModalOpen(false)} />
+        <AboutMasterChief
+          onClose={() => setIsAboutModalOpen(false)}
+          aria-label="About Master Chief"
+        />
       )}
     </div>
   );

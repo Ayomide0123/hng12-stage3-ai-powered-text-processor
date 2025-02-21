@@ -404,7 +404,7 @@ export default function ChatBox() {
           <button
             className="ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 disabled:bg-blue-300 disabled:cursor-not-allowed"
             onClick={handleSendMessage}
-            disabled={isProcessing || inputText === ""}
+            disabled={isProcessing}
             aria-label="Send message"
           >
             <FiSend />

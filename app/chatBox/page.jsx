@@ -185,14 +185,12 @@ export default function ChatBox() {
     // The Chat UI
     <div
       className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white"
-      aria-label="Chat Interface"
     >
       <div
         className="w-full max-w-3xl p-4 bg-gray-800 rounded-lg shadow-lg flex flex-col h-[90vh]"
         role="region"
-        aria-labelledby="chatbox-title"
       >
-        <h2 id="chatbox-title" className="hidden">
+        <h2 className="hidden">
           Chat with Master Chief
         </h2>
         <div className="flex items-center justify-between border-b border-gray-700 pb-2 mb-4">
@@ -398,14 +396,11 @@ export default function ChatBox() {
               }
             }}
             disabled={isProcessing}
-            aria-label="Message input field"
-            aria-required="true"
           />
           <button
             className="ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 disabled:bg-blue-300 disabled:cursor-not-allowed"
             onClick={handleSendMessage}
             disabled={isProcessing}
-            aria-label="Send message"
           >
             <FiSend />
           </button>
@@ -418,7 +413,6 @@ export default function ChatBox() {
       {isAboutModalOpen && (
         <AboutMasterChief
           onClose={() => setIsAboutModalOpen(false)}
-          aria-label="About Master Chief"
         />
       )}
     </div>

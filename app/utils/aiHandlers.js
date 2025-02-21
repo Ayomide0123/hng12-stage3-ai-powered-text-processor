@@ -5,22 +5,15 @@ export const handleLanguageDetection = async (inputText) => {
       await self.ai.languageDetector.capabilities();
     const canDetect = languageDetectorCapabilities.capabilities;
 
-    // if ('ai' in self && 'languageDetector' in self.ai){
-    //   throw new Error("Language detection is not available on this browser.");
-    // }
-
     if (canDetect === "no") {
       throw new Error("Language detection can't be used at the moment.");
     }
 
-    if (canDetect === "after-download") {
-      throw new Error("Language detection model hasn't been downloaded yet.");
-    }
-
     let detector;
     if (canDetect === "readily") {
+      // Create the detector if it's readily available
       detector = await self.ai.languageDetector.create();
-    } else if (canDetect === "after-download"){
+    } else {
       detector = await self.ai.languageDetector.create({
         monitor(m) {
           m.addEventListener("downloadprogress", (e) => {
@@ -31,14 +24,17 @@ export const handleLanguageDetection = async (inputText) => {
       await detector.ready;
     }
 
+    // Detect the language of the input text
     const results = await detector.detect(inputText);
     if (results.length === 0) {
       throw new Error("No language detected.");
     }
 
+    // Return the top detected language since result returns an array of languages
     const topLanguage = results[0].detectedLanguage;
     return topLanguage;
   } catch (err) {
+    // Handle possible errors
     throw new Error(err.message);
   }
 };
@@ -64,6 +60,7 @@ export const handleLanguageDetection = async (inputText) => {
       );
     }
 
+    // Create the translator
     const translator = await self.ai.translator.create({
       sourceLanguage,
       targetLanguage,
@@ -74,9 +71,11 @@ export const handleLanguageDetection = async (inputText) => {
       },
     });
 
+    // Translate the input text and return the translation
     const translation = await translator.translate(inputText);
     return translation;
   } catch (err) {
+    // Handle possible errors
     throw new Error(err.message);
   }
 };
@@ -88,6 +87,7 @@ export const handleSummarization = async (inputText) => {
     const summarizerCapabilities = await self.ai.summarizer.capabilities();
     const available = summarizerCapabilities.available;
 
+    // Handle cases where summarization feature is not available
     if (available === "no") {
       throw new Error("Summarization is not available.");
     }
@@ -96,6 +96,7 @@ export const handleSummarization = async (inputText) => {
     const summary = await summarizer.summarize(inputText); // No context needed
     return summary;
   } catch (err) {
+    // Handle possible errors
     throw new Error(err.message);
   }
 };

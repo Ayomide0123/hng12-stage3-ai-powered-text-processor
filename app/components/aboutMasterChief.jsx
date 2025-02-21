@@ -20,25 +20,20 @@ export default function AboutMasterChief({ onClose }) {
   return (
     <div
       className="fixed inset-0 flex items-center justify-center p-4 z-20"
-      aria-label="About Master Chief Modal"
     >
       <div
         ref={modalRef}
         className="bg-gray-900 text-white rounded-lg shadow-lg w-full max-w-3xl max-h-[80vh] sm:max-h-[70vh] overflow-y-auto p-6 textArea"
-        aria-labelledby="about-master-chief-title"
-        aria-describedby="about-master-chief-description"
       >
         <div className="flex justify-end">
           <button
             className="text-gray-400 hover:text-white"
             onClick={onClose}
-            aria-label="Close About Master Chief modal"
           >
             <IoClose size={40} />
           </button>
         </div>
         <h1
-          id="about-master-chief-title"
           className="text-3xl font-bold mb-4 text-center"
         >
           Master Chief
@@ -46,7 +41,7 @@ export default function AboutMasterChief({ onClose }) {
 
         <section className="mb-6">
           <h2 className="text-xl font-semibold mb-2">About The Master Chief</h2>
-          <p id="about-master-chief-description" className="text-gray-300">
+          <p className="text-gray-300">
             AI Text Processor (Master Chief) helps you detect languages,
             translate text, and summarize messages.
           </p>
@@ -92,7 +87,6 @@ export default function AboutMasterChief({ onClose }) {
           <div className="overflow-x-auto">
             <table
               className="w-full bg-gray-800 text-white rounded-lg"
-              aria-label="Supported Languages Table"
             >
               <thead>
                 <tr>
@@ -128,7 +122,6 @@ export default function AboutMasterChief({ onClose }) {
             className="text-blue-400 hover:underline"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Documentation for requirements"
           >
             requirements listed in the documentation.
           </a>

@@ -6,6 +6,7 @@ Master Chief AI, an AI-Powered Text Processor, is a web application built with [
 
 ## Features
 
+- **Note**: You may need to turn on experimental feature flag in your Chrome browser to access these native AI APIs.
 - **Language Detection**: Automatically detects the language of the input text.
 - **Text Translation**: Translates text from one language to another.
 - **Text Summarization**: Generates concise summaries of longer texts.

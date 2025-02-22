@@ -62,6 +62,10 @@ export const handleTranslation = async (
   targetLanguage
 ) => {
   try {
+    if (sourceLanguage === targetLanguage) {
+      throw new Error(`Text is already in ${getLanguageName(sourceLanguage)}`);
+    }
+
     const translatorCapabilities = await self.ai.translator.capabilities();
     const isLanguagePairAvailable =
       translatorCapabilities.languagePairAvailable(

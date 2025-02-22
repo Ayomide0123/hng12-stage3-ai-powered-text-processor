@@ -1,3 +1,19 @@
+// List of available languages
+const LANGUAGES = [
+  { code: "en", name: "English" },
+  { code: "pt", name: "Portuguese" },
+  { code: "es", name: "Spanish" },
+  { code: "ru", name: "Russian" },
+  { code: "tr", name: "Turkish" },
+  { code: "fr", name: "French" },
+];
+
+// Function to get language name based on the language code
+function getLanguageName(code) {
+  const language = LANGUAGES.find((lang) => lang.code === code);
+  return language ? language.name : code;
+}
+
 // Language Detection
 export const handleLanguageDetection = async (inputText) => {
   try {
@@ -39,9 +55,8 @@ export const handleLanguageDetection = async (inputText) => {
   }
 };
 
-
- // Translation
- export const handleTranslation = async (
+// Translation
+export const handleTranslation = async (
   inputText,
   sourceLanguage,
   targetLanguage
@@ -54,9 +69,16 @@ export const handleLanguageDetection = async (inputText) => {
         targetLanguage
       );
 
-    if (isLanguagePairAvailable === "no") {
+    if (
+      isLanguagePairAvailable === "no" ||
+      isLanguagePairAvailable === "after-download"
+    ) {
       throw new Error(
-        `Translation from ${sourceLanguage} to ${targetLanguage} is not available.`
+        `Translation from ${getLanguageName(
+          sourceLanguage
+        )} to ${getLanguageName(
+          targetLanguage
+        )} is not available on this device.`
       );
     }
 
@@ -65,7 +87,7 @@ export const handleLanguageDetection = async (inputText) => {
       sourceLanguage,
       targetLanguage,
       monitor(m) {
-        m.addEventListener('downloadprogress', (e) => {
+        m.addEventListener("downloadprogress", (e) => {
           console.log(`Downloaded ${e.loaded} of ${e.total} bytes.`);
         });
       },
@@ -80,7 +102,6 @@ export const handleLanguageDetection = async (inputText) => {
   }
 };
 
-
 // Summarization
 export const handleSummarization = async (inputText) => {
   try {
@@ -88,8 +109,8 @@ export const handleSummarization = async (inputText) => {
     const available = summarizerCapabilities.available;
 
     // Handle cases where summarization feature is not available
-    if (available === "no") {
-      throw new Error("Summarization is not available.");
+    if (available === "no" || available === "after-download") {
+      throw new Error("Summarization is not available on this device.");
     }
 
     const summarizer = await self.ai.summarizer.create();
